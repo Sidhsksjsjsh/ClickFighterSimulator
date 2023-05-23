@@ -18,6 +18,27 @@ for _,npc in pairs(game:GetService("Workspace").Maps:GetChildren()) do
     table.insert(npcs, npc.Name)
 end
 --]]
+-- :FindFirstChild("")
+
+function tp(pos)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos.CFrame)
+end
+
+function AttackEnemy(world)
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc001"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc002"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc003"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc004"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc005"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc006"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc007"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc008"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc009"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc010"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc011"])
+    game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(game:GetService("Workspace").Maps[world].Enemies["Npc012"])
+end
+
 local dimension = T1:AddDropdown("Select World", function(object)
     _G.World = object
 end)
@@ -39,11 +60,8 @@ T1:AddSwitch("Auto Attack", function(bool)
     _G.Atk = bool
     while wait() do
         if _G.Atk == false then break end
-           for _,npc in pairs(game:GetService("Workspace").Maps[_G.World].Enemies:GetChildren()) do
-                 table.insert(npcs, npc.Name)
-           end
-      
-           game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(npcs[math.random(1, #npcs)])
+           AttackEnemy(_G.World)
+           tp(game:GetService("Workspace").Maps[_G.World].Chest.HitBox)
      end
 end)
 
