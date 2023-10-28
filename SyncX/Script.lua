@@ -38,6 +38,7 @@ end
 local zone = {}
 local workspace = game:GetService("Workspace")
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
+local test = {}
 
 OrionLib:AddTable(workspace.Maps,zone)
 
@@ -64,9 +65,14 @@ end
 
 function AttackEnemy(w)
 Children(workspace.Maps[w].Enemies,function(v)
-game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(v.Name)
+game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(v.Name,false)
 end)
 end
+
+Children(workspace.Maps,function(v)
+        OrionLib:AddTable(v.Eggs,test)
+end)
+                
 
 T1:AddDropdown({
 Name = "Select world",
@@ -173,10 +179,32 @@ Callback = function(bool)
      end
 end})
 
+T1:AddToggle({
+Name = "Auto Claim Gifts",
+Default = false,
+Callback = function(bool)
+_G._Gifts = bool
+            while wait() do
+                if _G._Gifts == false then break end
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift001")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift002")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift003")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift004")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift005")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift006")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift007")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift008")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift009")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift010")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift011")
+                game:GetService("ReplicatedStorage")["Remotes"]["Re_ClaimOnline"]:FireServer("OnlineGift012")
+            end
+end})
+
 T2:AddDropdown({
 Name = "Select chest",
 Default = "Draw001",
-Options = chest,
+Options = test,
 Callback = function(ass)
     _G.draw = ass
 end})
