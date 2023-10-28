@@ -65,14 +65,9 @@ end
 
 function AttackEnemy(w)
 Children(workspace.Maps[w].Enemies,function(v)
-game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(v.Name,false)
+game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(v.Name,false)
 end)
 end
-
-Children(workspace.Maps,function(v)
-        OrionLib:AddTable(v.Eggs,test)
-end)
-                
 
 T1:AddDropdown({
 Name = "Select world",
@@ -102,7 +97,6 @@ Callback = function(bool)
     while wait() do
         if _G.Atk == false then break end
            AttackEnemy(_G.World)
-           OrionLib:Teleport(workspace.Maps[_G.World].Chest.HitBox)
      end
 end})
 
@@ -113,7 +107,8 @@ Callback = function(bool)
     _G.Win = bool
     while wait() do
         if _G.Win == false then break end
-           game:GetService("ReplicatedStorage").Remotes.RF_Winner:InvokeServer(_G.World)
+           --game:GetService("ReplicatedStorage").Remotes.RF_Winner:InvokeServer(_G.World)
+            OrionLib:Teleport(workspace.Maps[_G.World].Chest.HitBox)
      end
 end})
 
@@ -201,10 +196,21 @@ _G._Gifts = bool
             end
 end})
 
+T1:AddToggle({
+Name = "Auto Claim Quest",
+Default = false,
+Callback = function(bool)
+    _G.Qst = bool
+    while wait() do
+        if _G.Qst == false then break end
+           game:GetService("ReplicatedStorage")["Remotes"]["Re_TaskClaimed"]:FireServer()
+     end
+end})
+
 T2:AddDropdown({
 Name = "Select chest",
 Default = "Draw001",
-Options = test,
+Options = chest,
 Callback = function(ass)
     _G.draw = ass
 end})
