@@ -43,9 +43,9 @@ end
 
 local function MakeHitbox(w)
 TblString(workspace.Maps[w].Enemies,function(v)
-    v.Character.HumanoidRootPart.Size = Vector3.new(50,50,50)
-    v.Character.HumanoidRootPart.Transparency = 1
-    v.Character.HumanoidRootPart.CanCollide = false
+    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+    v.HumanoidRootPart.Transparency = 1
+    v.HumanoidRootPart.CanCollide = false
  end)
 end
 
@@ -116,13 +116,14 @@ Callback = function(bool)
 end})
 
 T1:AddToggle({
-Name = "Auto Attack",
+Name = "Aura",
 Default = false,
 Callback = function(bool)
     _G.Atk = bool
     while wait() do
         if _G.Atk == false then break end
-           AttackEnemy(_G.World)
+           --AttackEnemy(_G.World)
+            MakeHitbox(_G.World)
      end
 end})
 
