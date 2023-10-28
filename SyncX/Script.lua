@@ -91,7 +91,7 @@ Callback = function(ass)
     _G.World = ass
 end})
 
-S2:AddButton({
+T1:AddButton({
   Name = "Refresh Selection",
   Callback = function()
       zone = {}
