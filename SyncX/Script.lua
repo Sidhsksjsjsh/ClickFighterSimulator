@@ -63,14 +63,14 @@ end
 -- :FindFirstChild("")
 
 function AttackEnemy(w)
-Children(workspace.Maps[w],function(v)
+Children(workspace.Maps[w].Enemies,function(v)
 game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(v.Name)
 end)
 end
 
 T1:AddDropdown({
 Name = "Select world",
-Default = "",
+Default = "World001",
 Options = zone,
 Callback = function(ass)
     _G.World = ass
