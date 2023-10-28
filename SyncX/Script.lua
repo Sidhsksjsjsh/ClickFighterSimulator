@@ -35,6 +35,20 @@ for i, v in pairs(a:GetChildren()) do
 end
 end
 
+local function TblString(a,str)
+for i,v in next, a:GetChildren() do
+      str(v)
+    end
+end
+
+local function MakeHitbox(w)
+TblString(workspace.Maps[w].Enemies,function(v)
+    v.Character.HumanoidRootPart.Size = Vector3.new(50,50,50)
+    v.Character.HumanoidRootPart.Transparency = 1
+    v.Character.HumanoidRootPart.CanCollide = false
+ end)
+end
+
 local zone = {}
 local workspace = game:GetService("Workspace")
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
@@ -69,7 +83,7 @@ game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(v.Na
 end)
 end
 
-T1:AddDropdown({
+local Select1 = T1:AddDropdown({
 Name = "Select world",
 Default = "World001",
 Options = zone,
@@ -77,6 +91,18 @@ Callback = function(ass)
     _G.World = ass
 end})
 
+S2:AddButton({
+  Name = "Refresh Selection",
+  Callback = function()
+      zone = {}
+      Select1:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      OrionLib:AddTable(workspace.Maps,zone)
+      wait(0.1)
+      Select1:Refresh(zone,true)
+      Select1:Set(zone[1])
+  end    
+})
 
 T1:AddToggle({
 Name = "Farm Power",
