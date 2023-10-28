@@ -1,15 +1,57 @@
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/Uub92rmN"))()
+--[[
+function C(W)
+spawn(function ()
+while getgenv().C do
+for i, v in pairs(game:GetService("Workspace").Maps[W].Enemies:GetChildren())
+do local args = {[1] = v.Name} 
+game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(unpack(args)) end wait() end end)
+spawn(function ()
+while getgenv().C do 
+game:GetService("ReplicatedStorage").Remotes.RE_ClickPower:FireServer()
+wait() 
+end 
+end)
+end
 
+function H(E)
+    spawn(function ()
+        while getgenv().H do
+local args = {
+[1] = "Hatch",
+[2] = E,
+[3] = {}
+}
+game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer(unpack(args)) wait()
+        end
+    end)
+end]]
+local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 
-local Window = library:AddWindow("Sync X - Cheating Tool",
-    {
-        main_color = Color3.fromRGB(170, 0, 0),
-        min_size = Vector2.new(373, 433),
-        toggle_key = Enum.KeyCode.RightShift,
-    })
+local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 
-local T1 = Window:AddTab("Farm")
-local T2 = Window:AddTab("Draw")
+local function Children(a,func)
+for i, v in pairs(a:GetChildren()) do
+    func(v)
+end
+end
+
+local zone = {}
+local workspace = game:GetService("Workspace")
+local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
+
+OrionLib:AddTable(workspace.Maps,zone)
+
+local T1 = Window:MakeTab({
+Name = "Main",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local T2 = Window:MakeTab({
+Name = "Hatch",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
 
 local npcs = {}
 
@@ -20,120 +62,81 @@ end
 --]]
 -- :FindFirstChild("")
 
-function tp(pos)
-    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(pos.CFrame)
-end
-
-function AttackEnemy(world)
-    if world == "World001" then
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc001")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc002")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc003")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc004")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc005")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc006")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc007")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc008")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc009")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc010")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc011")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc012")
-     end
-    if world == "World002" then
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc013")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc014")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc015")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc016")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc017")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc018")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc019")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc020")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc021")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc022")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc023")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc024")
-     end
-    if world == "World003" then
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc025")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc026")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc027")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc028")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc029")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc030")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc032")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc033")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc034")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc035")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc036")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc037")
-     end
-    if world == "World004" then
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc038")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc039")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc040")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc041")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc042")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc043")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc044")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc045")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc046")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc047")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc048")
-        game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer("Npc049")
-     end
-end
-
-local dimension = T1:AddDropdown("Select World", function(object)
-    _G.World = object
+function AttackEnemy(w)
+Children(workspace.Maps[w],function(v)
+game:GetService("ReplicatedStorage").Remotes.RE_TakeDamage:FireServer(v.Name)
 end)
+end
 
-dimension:Add("World001")
-dimension:Add("World002")
-dimension:Add("World003")
-dimension:Add("World004")
+T1:AddDropdown({
+Name = "Select world",
+Default = "",
+Options = zone,
+Callback = function(ass)
+    _G.World = ass
+end})
 
-T1:AddSwitch("Auto Farm Power", function(bool)
+
+T1:AddToggle({
+Name = "Farm Power",
+Default = false,
+Callback = function(bool)
     _G.Energy = bool
     while wait() do
         if _G.Energy == false then break end
            game:GetService("ReplicatedStorage").Remotes.RE_ClickPower:FireServer()
      end
-end)
+end})
 
-T1:AddSwitch("Auto Attack", function(bool)
+T1:AddToggle({
+Name = "Auto Attack",
+Default = false,
+Callback = function(bool)
     _G.Atk = bool
     while wait() do
         if _G.Atk == false then break end
            AttackEnemy(_G.World)
-           tp(game:GetService("Workspace").Maps[_G.World].Chest.HitBox)
+           OrionLib:Teleport(workspace.Maps[_G.World].Chest.HitBox)
      end
-end)
+end})
 
-T1:AddSwitch("Auto Farm Win", function(bool)
+T1:AddToggle({
+Name = "Farm Win",
+Default = false,
+Callback = function(bool)
     _G.Win = bool
     while wait() do
         if _G.Win == false then break end
            game:GetService("ReplicatedStorage").Remotes.RF_Winner:InvokeServer(_G.World)
      end
-end)
+end})
 
-T1:AddSwitch("Auto Spin", function(bool)
+T1:AddToggle({
+Name = "Auto Spin",
+Default = false,
+Callback = function(bool)
     _G.Spin = bool
     while wait() do
         if _G.Spin == false then break end
            game:GetService("ReplicatedStorage").Remotes.RF_Spin:InvokeServer()
      end
-end)
+end})
 
-T1:AddSwitch("Auto Rebirth", function(bool)
+T1:AddToggle({
+Name = "Auto rebirth",
+Default = false,
+Callback = function(bool)
     _G.Re = bool
     while wait() do
         if _G.Re == false then break end
            game:GetService("ReplicatedStorage").Remotes.RE_Rebirth:FireServer()
      end
-end)
+end})
 
-T1:AddSwitch("Auto Claim Achievement", function(bool)
+T1:AddToggle({
+Name = "Auto Claim Achievement",
+Default = false,
+Callback = function(bool)
     _G.Ac = bool
     while wait() do
         if _G.Ac == false then break end
@@ -168,36 +171,34 @@ T1:AddSwitch("Auto Claim Achievement", function(bool)
            game:GetService("ReplicatedStorage").Remotes.RE_AddAchieve:FireServer("Achieve029")
            game:GetService("ReplicatedStorage").Remotes.RE_AddAchieve:FireServer("Achieve030")
      end
-end)
+end})
 
-local draw = T2:AddDropdown("Select Chest", function(object)
-    _G.draw = object
-end)
+T2:AddDropdown({
+Name = "Select chest",
+Default = "Draw001",
+Options = chest,
+Callback = function(ass)
+    _G.draw = ass
+end})
 
-draw:Add("Draw001")
-draw:Add("Draw002")
-draw:Add("Draw003")
-draw:Add("Draw004")
-draw:Add("Draw005")
-
-T2:AddSwitch("Auto draw", function(bool)
+T2:AddToggle({
+Name = "Auto Hatch",
+Default = false,
+Callback = function(bool)
     _G.DrawOpen = bool
     while wait() do
       if _G.DrawOpen == false then break end
-      local args = {
-            [1] = "Hatch",
-            [2] = _G.draw,
-            [3] = {}
-      }
-
-       game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer(unpack(args))
+      game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer("Hatch",_G.draw,{})
     end
-end)
+end})
 
-T2:AddSwitch("Auto Equip best", function(bool)
+T2:AddToggle({
+Name = "Auto Equip Best",
+Default = false,
+Callback = function(bool)
     _G.BPet = bool
     while wait() do
         if _G.BPet == false then break end
            game:GetService("ReplicatedStorage").Remotes.RE_EquipBest:FireServer(true)
      end
-end)
+end})
