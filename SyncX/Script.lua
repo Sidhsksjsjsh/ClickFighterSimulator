@@ -52,7 +52,7 @@ end
 local zone = {}
 local workspace = game:GetService("Workspace")
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
-local test = {}
+local egg = {}
 
 OrionLib:AddTable(workspace.Maps,zone)
 
@@ -85,7 +85,7 @@ end
 
 local Select1 = T1:AddDropdown({
 Name = "Select world",
-Default = "World001",
+Default = zone[1],
 Options = zone,
 Callback = function(ass)
     _G.World = ass
@@ -234,13 +234,34 @@ Callback = function(bool)
      end
 end})
 
-T2:AddDropdown({
+--OrionLib:AddTable(workspace.Maps,zone)
+
+Children(workspace.Maps,function(v)
+        OrionLib:AddTable(v.Eggs,egg)
+end)
+
+local Select2 = T2:AddDropdown({
 Name = "Select chest",
-Default = "Draw001",
-Options = chest,
+Default = egg[1],
+Options = egg,
 Callback = function(ass)
     _G.draw = ass
 end})
+
+T2:AddButton({
+  Name = "Refresh Selection",
+  Callback = function()
+      zone = {}
+      Select2:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      Children(workspace.Maps,function(v)
+        OrionLib:AddTable(v.Eggs,egg)
+      end)
+      wait(0.1)
+      Select2:Refresh(egg,true)
+      Select2:Set(egg[1])
+  end    
+})
 
 T2:AddToggle({
 Name = "Auto Hatch",
