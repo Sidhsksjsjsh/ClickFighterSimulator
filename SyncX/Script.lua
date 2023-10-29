@@ -96,7 +96,7 @@ local asshole = {}
 
 OrionLib:AddTable(workspace.Maps,zone)
 OrionLib:AddTable(workspace.Ninja.NPC,chl)
-OrionLib:AddTable(Workspace[speaker].Pets,asshole)
+OrionLib:AddTable(workspace[speaker.Name].Pets,asshole)
 
 local T1 = Window:MakeTab({
 Name = "Main",
