@@ -41,6 +41,17 @@ end
 	return namecall(self, ...) 
 end)
 
+local oldNamecall = mt.__namecall
+mt.__namecall = newcclosure(function(self, ...)
+                local Args = {...}
+                local method = getnamecallmethod()
+                if tostring(self) == "RE_TakeDamage" and tostring(method) == "FireServer" then
+		      Args[2] = true
+		    return self.FireServer(self, unpack(Args))
+		end
+                return oldNamecall(self, ...)
+            end)
+
 local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local speaker = game.Players.LocalPlayer
