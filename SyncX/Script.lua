@@ -375,7 +375,7 @@ S2:AddButton({
       asshole = {}
       Select4:Refresh({"Refreshing.."},true)
       wait(0.1)
-      OrionLib:AddTable(Workspace[speaker.Name].Pets,asshole)
+      OrionLib:AddTable(workspace[speaker.Name].Pets,asshole)
       wait(0.1)
       Select4:Refresh(asshole,true)
       Select4:Set(asshole[1])
@@ -383,9 +383,16 @@ S2:AddButton({
 })
 
 S2:AddButton({
-Name = "FUSE [SHINY]",
+Name = "FUSE EQUIPPED PETS [SHINY]",
 Callback = function()
       game:GetService("ReplicatedStorage")["Remotes"]["RE_PetFuse"]:FireServer("Shiny",{_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets})
+  end    
+})
+
+S2:AddButton({
+Name = "FUSE EQUIPPED PETS [RAINBOW]",
+Callback = function()
+      game:GetService("ReplicatedStorage")["Remotes"]["RE_PetFuse"]:FireServer("Rainbow",{_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets})
   end    
 })
 
