@@ -25,8 +25,23 @@ game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer(unpack(args)) wa
         end
     end)
 end]]
-local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 
+local LastE = nil
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'FireServer' and self.Name == 'RE_TakeDamage' then
+        LastE = Args[1]
+end
+	return namecall(self, ...) 
+end)
+
+local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local speaker = game.Players.LocalPlayer
 local LocalPlayer = speaker.Character
@@ -95,12 +110,12 @@ end
 --]]
 -- :FindFirstChild("")
 
-function AttackEnemy(w)
-Children(workspace.Maps[w].Enemies,function(v)
-game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(v.Name,false)
-end)
-end
+local BatchSkills = false
 
+function AttackEnemy()
+game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(LastE,BatchSkills)
+end
+--[[
 local Select1 = T1:AddDropdown({
 Name = "Select world",
 Default = zone[1],
@@ -121,6 +136,14 @@ T1:AddButton({
       Select1:Set(zone[1])
   end    
 })
+]]
+
+T1:AddToggle({
+Name = "Use Skills",
+Default = false,
+Callback = function(bool)
+BatchSkills = bool
+end})
 
 T1:AddToggle({
 Name = "Farm Power",
@@ -134,14 +157,13 @@ Callback = function(bool)
 end})
 
 T1:AddToggle({
-Name = "Aura",
+Name = "Auto Attack Enemy [The last enemy you dealt damage to]",
 Default = false,
 Callback = function(bool)
     _G.Atk = bool
     while wait() do
         if _G.Atk == false then break end
-           --AttackEnemy(_G.World)
-            MakeHitbox(_G.World)
+           AttackEnemy()
      end
 end})
 
