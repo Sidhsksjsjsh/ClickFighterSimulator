@@ -24,7 +24,7 @@ local args = {
 game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer(unpack(args)) wait()
         end
     end)
-end]]
+end
 
 local LastE = nil
 local mt = getrawmetatable(game);
@@ -40,12 +40,15 @@ mt.__namecall = newcclosure(function(self, ...)
 end
 	return namecall(self, ...) 
 end)
-
+]]
+local cnfrm = false
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
 local oldNamecall = mt.__namecall
 mt.__namecall = newcclosure(function(self, ...)
                 local Args = {...}
                 local method = getnamecallmethod()
-                if tostring(self) == "RE_TakeDamage" and tostring(method) == "FireServer" then
+                if tostring(self) == "RE_TakeDamage" and tostring(method) == "FireServer" and cnfrm == true then
 		      Args[2] = true
 		    return self.FireServer(self, unpack(Args))
 		end
@@ -153,7 +156,7 @@ T1:AddToggle({
 Name = "Use Skills",
 Default = false,
 Callback = function(bool)
-BatchSkills = bool
+cnfrm = bool
 end})
 
 T1:AddToggle({
@@ -167,7 +170,7 @@ Callback = function(bool)
      end
 end})
 
-T1:AddToggle({
+--[[T1:AddToggle({
 Name = "Auto Attack Enemy [The last enemy you dealt damage to]",
 Default = false,
 Callback = function(bool)
@@ -176,7 +179,7 @@ Callback = function(bool)
         if _G.Atk == false then break end
            AttackEnemy()
      end
-end})
+end})]]
 
 T1:AddToggle({
 Name = "Farm Win",
