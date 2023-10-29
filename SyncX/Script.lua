@@ -514,7 +514,7 @@ Callback = function(bool)
      end
 end})
 
-local test_system = {}
+local test_system = {"Press 'Refresh Selection' First!"}
 
 if speaker.Name == dev then
 local T4 = Window:MakeTab({
@@ -530,10 +530,6 @@ Options = zone,
 Callback = function(ass)
     _G._test_World = ass
 end})
-
-Children(workspace.Maps[_G._test_World],function(x)
-	OrionLib:AddTable(x.Enemies,test_system)
-end)
 	
 local Select5 = T4:AddDropdown({
 Name = "Select Enemy (Test)",
