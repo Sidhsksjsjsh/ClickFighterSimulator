@@ -62,8 +62,11 @@ local zone = {}
 local workspace = game:GetService("Workspace")
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
 local egg = {}
+local chl = {}
 
 OrionLib:AddTable(workspace.Maps,zone)
+OrionLib:AddTable(workspace.Ninja.NPC,chl)
+
 
 local T1 = Window:MakeTab({
 Name = "Main",
@@ -73,6 +76,12 @@ PremiumOnly = false
 
 local T2 = Window:MakeTab({
 Name = "Hatch",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local T3 = Window:MakeTab({
+Name = "Challenge",
 Icon = "rbxassetid://",
 PremiumOnly = false
 })
@@ -243,6 +252,28 @@ Callback = function(bool)
      end
 end})
 
+T1:AddToggle({
+Name = "Auto Claim Candy",
+Default = false,
+Callback = function(bool)
+    _G.Candys = bool
+    while wait() do
+        if _G.Candys == false then break end
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift001")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift002")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift003")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift004")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift005")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift006")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift007")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift008")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift009")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift010")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift011")
+           game:GetService("ReplicatedStorage")["Remotes"]["Hollywood"]["Re_Online"]:FireServer("OnlineGift012")
+     end
+end})
+
 --OrionLib:AddTable(workspace.Maps,zone)
 
 Children(workspace.Maps,function(v)
@@ -293,3 +324,80 @@ Callback = function(bool)
            game:GetService("ReplicatedStorage").Remotes.RE_EquipBest:FireServer(true)
      end
 end})
+
+local Select3 = T3:AddDropdown({
+Name = "Select Challenger",
+Default = chl[1],
+Options = chl,
+Callback = function(ass)
+    _G.chler = ass
+end})
+
+T3:AddButton({
+  Name = "Refresh Selection",
+  Callback = function()
+      chl = {}
+      Select3:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      OrionLib:AddTable(workspace.Ninja.NPC,chl)
+      wait(0.1)
+      Select3:Refresh(chl,true)
+      Select3:Set(chl[1])
+  end    
+})
+
+T3:AddToggle({
+Name = "Auto Attack",
+Default = false,
+Callback = function(bool)
+    _G.AtkChl = bool
+    while wait() do
+      if _G.AtkChl == false then break end
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(false,_G.chler)
+    end
+end})
+
+T3:AddToggle({
+Name = "Auto Attack All",
+Default = false,
+Callback = function(bool)
+    _G.AtkChl2 = bool
+    while wait() do
+      if _G.AtkChl2 == false then break end
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(false,_G.chler[1])
+    end
+end})
+
+T3:AddToggle({
+Name = "Auto Claim Tiket Challenge",
+Default = false,
+Callback = function(bool)
+    _G.CTK = bool
+    while wait() do
+        if _G.CTK == false then break end
+           game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ClaimTicket"]:FireServer()
+     end
+end})
+
+T3:AddToggle({
+Name = "Auto Start Challenge",
+Default = false,
+Callback = function(bool)
+    _G.SC = bool
+    while wait() do
+        if _G.SC == false then break end
+           game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeRequest"]:FireServer()
+     end
+end})
+
+T3:AddToggle({
+Name = "Auto Hatch Skill",
+Default = false,
+Callback = function(bool)
+    _G.SK = bool
+    while wait() do
+        if _G.SK == false then break end
+           game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_HatchSkill"]:FireServer("SkillDraw001")
+     end
+end})
+
