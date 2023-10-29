@@ -347,13 +347,20 @@ T3:AddButton({
 })
 
 T3:AddToggle({
+Name = "Use Skill",
+Default = false,
+Callback = function(bool)
+ _G._ShitSkill = bool
+end})
+
+T3:AddToggle({
 Name = "Auto Attack",
 Default = false,
 Callback = function(bool)
     _G.AtkChl = bool
     while wait() do
       if _G.AtkChl == false then break end
-      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(false,_G.chler)
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,_G.chler)
     end
 end})
 
@@ -364,12 +371,20 @@ Callback = function(bool)
     _G.AtkChl2 = bool
     while wait() do
       if _G.AtkChl2 == false then break end
-      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(false,_G.chler[1])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[1])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[2])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[3])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[4])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[5])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[6])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[7])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[8])
+      game:GetService("ReplicatedStorage")["Remotes"]["Ninja"]["Re_ChallengeDamage"]:FireServer(_G._ShitSkill,chl[9])
     end
 end})
 
 T3:AddToggle({
-Name = "Auto Claim Tiket Challenge",
+Name = "Auto Claim Ticket Challenge",
 Default = false,
 Callback = function(bool)
     _G.CTK = bool
