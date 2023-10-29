@@ -25,8 +25,9 @@ game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer(unpack(args)) wa
         end
     end)
 end
-
+]]
 local LastE = nil
+local DeletedPet = nil
 local mt = getrawmetatable(game);
 setreadonly(mt,false)
 local namecall = mt.__namecall
@@ -35,14 +36,14 @@ mt.__namecall = newcclosure(function(self, ...)
 	local Method = getnamecallmethod()
 	local Args = {...}
 
-	if Method == 'FireServer' and self.Name == 'RE_TakeDamage' then
-        LastE = Args[1]
+	if Method == 'FireServer' and self.Name == 'RE_Draw' then
+        DeletedPet = Args[3]
 end
 	return namecall(self, ...) 
 end)
-]]
+
 local cnfrm = false
-local mt = getrawmetatable(game);
+--[[local mt = getrawmetatable(game);
 setreadonly(mt,false)
 local oldNamecall = mt.__namecall
 mt.__namecall = newcclosure(function(self, ...)
@@ -54,6 +55,7 @@ mt.__namecall = newcclosure(function(self, ...)
 		end
                 return oldNamecall(self, ...)
             end)
+]]
 
 local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
@@ -357,7 +359,7 @@ Callback = function(bool)
     _G.DrawOpen = bool
     while wait() do
       if _G.DrawOpen == false then break end
-      game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer("Hatch",_G.draw,{})
+      game:GetService("ReplicatedStorage").Remotes.RE_Draw:FireServer("Hatch",_G.draw,DeletedPet)
     end
 end})
 
