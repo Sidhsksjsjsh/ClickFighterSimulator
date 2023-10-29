@@ -92,10 +92,11 @@ local workspace = game:GetService("Workspace")
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
 local egg = {}
 local chl = {}
+local asshole = {}
 
 OrionLib:AddTable(workspace.Maps,zone)
 OrionLib:AddTable(workspace.Ninja.NPC,chl)
-
+OrionLib:AddTable(Workspace[speaker].Pets,asshole)
 
 local T1 = Window:MakeTab({
 Name = "Main",
@@ -107,6 +108,14 @@ local T2 = Window:MakeTab({
 Name = "Hatch",
 Icon = "rbxassetid://",
 PremiumOnly = false
+})
+
+local S1 = T2:AddSection({
+Name = "CHEST"
+})
+
+local S2 = T2:AddSection({
+Name = "PET"
 })
 
 local T3 = Window:MakeTab({
@@ -312,11 +321,13 @@ end})
 
 --OrionLib:AddTable(workspace.Maps,zone)
 
+--OrionLib:AddTable(game:GetService("ReplicatedStorage").Models.Eggs,egg)
+
 Children(workspace.Maps,function(v)
         OrionLib:AddTable(v.Eggs,egg)
 end)
 
-local Select2 = T2:AddDropdown({
+local Select2 = S1:AddDropdown({
 Name = "Select chest",
 Default = egg[1],
 Options = egg,
@@ -324,7 +335,7 @@ Callback = function(ass)
     _G.draw = ass
 end})
 
-T2:AddButton({
+S1:AddButton({
   Name = "Refresh Selection",
   Callback = function()
       egg = {}
@@ -339,7 +350,7 @@ T2:AddButton({
   end    
 })
 
-T2:AddToggle({
+S1:AddToggle({
 Name = "Auto Hatch",
 Default = false,
 Callback = function(bool)
@@ -350,7 +361,35 @@ Callback = function(bool)
     end
 end})
 
-T2:AddToggle({
+local Select4 = S2:AddDropdown({
+Name = "Select Pet ID",
+Default = asshole[1],
+Options = asshole,
+Callback = function(ass)
+    _G._Fucking_Pets = ass
+end})
+
+S2:AddButton({
+  Name = "Refresh Pet Selection",
+  Callback = function()
+      asshole = {}
+      Select4:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      OrionLib:AddTable(Workspace[speaker.Name].Pets,asshole)
+      wait(0.1)
+      Select4:Refresh(asshole,true)
+      Select4:Set(asshole[1])
+  end    
+})
+
+S2:AddButton({
+Name = "FUSE [SHINY]",
+Callback = function()
+      game:GetService("ReplicatedStorage")["Remotes"]["RE_PetFuse"]:FireServer("Shiny",{_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets,_G._Fucking_Pets})
+  end    
+})
+
+S2:AddToggle({
 Name = "Auto Equip Best",
 Default = false,
 Callback = function(bool)
