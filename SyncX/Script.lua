@@ -62,9 +62,8 @@ local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
 local speaker = game.Players.LocalPlayer
 local LocalPlayer = speaker.Character
 
-
 local function Children(a,func)
-for i, v in pairs(a:GetChildren()) do
+for i,v in pairs(a:GetChildren()) do
     func(v)
 end
 end
@@ -91,10 +90,12 @@ end
 
 local zone = {}
 local workspace = game:GetService("Workspace")
+local camera = workspace.CurrentCamera
 local Window = OrionLib:MakeWindow({Name = "VIP Turtle Hub V3", HidePremium = false, SaveConfig = false, ConfigFolder = "TurtleFi"})
 local egg = {}
 local chl = {}
 local asshole = {}
+local dev = "Rivanda_Cheater"
 
 OrionLib:AddTable(workspace.Maps,zone)
 OrionLib:AddTable(workspace.Ninja.NPC,chl)
@@ -137,8 +138,8 @@ end
 
 local BatchSkills = false
 
-function AttackEnemy()
-game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(LastE,BatchSkills)
+function AttackEnemy(str)
+game:GetService("ReplicatedStorage")["Remotes"]["RE_TakeDamage"]:FireServer(str,false)
 end
 --[[
 local Select1 = T1:AddDropdown({
@@ -363,6 +364,19 @@ Callback = function(bool)
     end
 end})
 
+S1:AddToggle({
+Name = "Remove Animation",
+Default = false,
+Callback = function(bool)
+    _G.Animation = bool
+    while wait() do
+      if _G.Animation == false then break end
+      Children(camera,function(v)
+	v:Destroy()
+      end)
+    end
+end})
+
 local Select4 = S2:AddDropdown({
 Name = "Select Pet ID",
 Default = asshole[1],
@@ -500,3 +514,64 @@ Callback = function(bool)
      end
 end})
 
+local test_system = {}
+
+if speaker.Name == dev then
+local T4 = Window:MakeTab({
+Name = "Test Attack",
+Icon = "rbxassetid://",
+PremiumOnly = false
+})
+
+local Select6 = T4:AddDropdown({
+Name = "Select World",
+Default = zone[1],
+Options = zone,
+Callback = function(ass)
+    _G._test_World = ass
+end})
+
+Children(workspace.Maps[_G._test_World],function(x)
+	OrionLib:AddTable(x.Enemies,test_system)
+end)
+	
+local Select5 = T4:AddDropdown({
+Name = "Select Enemy (Test)",
+Default = test_system[1],
+Options = test_system,
+Callback = function(ass)
+    _G.system_caller = ass
+end})
+
+T4:AddButton({
+  Name = "Refresh Selection",
+  Callback = function()
+      test_system = {}
+      zone = {}
+      Select5:Refresh({"Refreshing.."},true)
+      Select6:Refresh({"Refreshing.."},true)
+      wait(0.1)
+      OrionLib:AddTable(workspace.Maps,zone)
+      Children(workspace.Maps[_G._test_World],function(x)
+	OrionLib:AddTable(x.Enemies,test_system)
+      end)
+      wait(0.1)
+      Select5:Refresh(test_system,true)
+      Select5:Set(test_system[1])
+      Select6:Refresh(zone,true)
+      Select6:Set(zone[1])
+  end    
+})
+
+T4:AddToggle({
+Name = "Auto Attack",
+Default = false,
+Callback = function(bool)
+    _G.tATK = bool
+    while wait() do
+        if _G.tATK == false then break end
+           AttackEnemy(_G.system_caller)
+	   OrionLib:Teleport(workspace.Maps[_G._test_World].Enemies[_G.system_caller].HumanoidRootPart)
+     end
+end})
+end
