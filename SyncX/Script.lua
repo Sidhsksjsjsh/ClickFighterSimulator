@@ -251,7 +251,7 @@ end})
 T2:AddButton({
   Name = "Refresh Selection",
   Callback = function()
-      zone = {}
+      egg = {}
       Select2:Refresh({"Refreshing.."},true)
       wait(0.1)
       Children(workspace.Maps,function(v)
