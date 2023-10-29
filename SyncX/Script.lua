@@ -28,11 +28,20 @@ end]]
 local chest = {"Draw001","Draw002","Draw003","Draw004","Draw005","Draw006","Draw007","Draw008","Draw009","Draw0010","Draw011","Draw012","Draw013","Draw014","Draw015","Draw016","Draw017","Draw018","Draw019","Draw020"}
 
 local OrionLib = loadstring(game:HttpGet("https://pastebin.com/raw/NMEHkVTb"))()
+local speaker = game.Players.LocalPlayer
+local LocalPlayer = speaker.Character
+
 
 local function Children(a,func)
 for i, v in pairs(a:GetChildren()) do
     func(v)
 end
+end
+
+local function ClickInterest(part)
+firetouchinterest(part, LocalPlayer.PrimaryPart, 0)
+wait(0.01)
+firetouchinterest(part, LocalPlayer.PrimaryPart, 1)
 end
 
 local function TblString(a,str)
@@ -135,7 +144,7 @@ Callback = function(bool)
     while wait() do
         if _G.Win == false then break end
            --game:GetService("ReplicatedStorage").Remotes.RF_Winner:InvokeServer(_G.World)
-            OrionLib:Teleport(workspace.Maps[_G.World].Chest.HitBox)
+            ClickInterest(workspace.Maps[_G.World].Chest.HitBox)
      end
 end})
 
